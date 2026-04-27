@@ -1,182 +1,171 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tableau Horizontal – Formation IA</title>
-<style>
-body {
-    font-family: Arial, sans-serif;
-    background: #fff;
-    margin: 20px;
-    color: #222;
-}
-h1 {
-    text-align: center;
-    color: #004080;
-    margin-bottom: 20px;
-}
-.table-container {
-    overflow-x: auto; /* permet le scroll horizontal si trop large */
-    border: 1px solid #ccc;
-    padding: 10px;
-}
-table {
-    border-collapse: collapse;
-    width: max-content; /* s’adapte au contenu pour tout sur une ligne */
-    min-width: 100%;
-}
-th, td {
-    border: 1px solid #ccc;
-    padding: 8px 12px;
-    text-align: center;
-    white-space: nowrap;
-}
-th {
-    background-color: #f2f2f2;
-}
-input[type=number] {
-    width: 50px;
-    text-align: center;
-}
-button {
-    margin-top: 15px;
-    padding: 10px 25px;
-    background-color: #004080;
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-    font-size: 16px;
-}
-button:hover {
-    background-color: #0066cc;
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Odilon Laly | Créateur digital & Développeur web</title>
+    <meta name="description" content="Odilon Laly, créateur digital et développeur web. Création de sites vitrines, contenus digitaux, chansons, visuels IA et prompts.">
+    <link rel="stylesheet" href="pageenligne.css">
+
+    <style>
+        /* Bouton WhatsApp flottant */
+        .whatsapp-float{
+            position:fixed;
+            bottom:20px;
+            right:20px;
+            background:#25D366;
+            color:white;
+            padding:12px 15px;
+            border-radius:50px;
+            text-decoration:none;
+            font-weight:bold;
+            box-shadow:0 0 10px rgba(0,0,0,0.3);
+            z-index:999;
+        }
+
+        .btn-commande{
+            display:inline-block;
+            margin-top:10px;
+            padding:12px 20px;
+            background:#facc15;
+            color:black;
+            text-decoration:none;
+            border-radius:5px;
+            font-weight:bold;
+        }
+    </style>
 </head>
+
 <body>
 
-<h1>Tableau d'évaluation – Formation IA</h1>
+    <!-- HEADER -->
+    <header>
+        <img src="lalylaodilon.png" alt="Photo de Odilon Laly" class="photo-profil">
 
-<div class="table-container">
-<table id="table-horizontal">
-<thead>
-<tr>
-<th>Nom du participant</th>
-<th>Présence (5)</th>
-<th>Réaction (5)</th>
-<th>Compréhension (5)</th>
-<th>Motivation (5)</th>
-<th>Total /20</th>
-<th>Pourcentage</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Bertino Djoubissie</td>
-<td><input type="number" min="0" max="5"></td>
-<td><input type="number" min="0" max="5"></td>
-<td><input type="number" min="0" max="5"></td>
-<td><input type="number" min="0" max="5"></td>
-<td class="total">0</td>
-<td class="percent">0%</td>
-</tr>
-<tr>
-<td>Dona Julien Ahonou</td>
-<td><input type="number" min="0" max="5"></td>
-<td><input type="number" min="0" max="5"></td>
-<td><input type="number" min="0" max="5"></td>
-<td><input type="number" min="0" max="5"></td>
-<td class="total">0</td>
-<td class="percent">0%</td>
-</tr>
-<tr>
-<td>Dossou Dossou</td>
-<td><input type="number" min="0" max="5"></td>
-<td><input type="number" min="0" max="5"></td>
-<td><input type="number" min="0" max="5"></td>
-<td><input type="number" min="0" max="5"></td>
-<td class="total">0</td>
-<td class="percent">0%</td>
-</tr>
-<tr>
-<td>Gandotor Crépin</td>
-<td><input type="number" min="0" max="5"></td>
-<td><input type="number" min="0" max="5"></td>
-<td><input type="number" min="0" max="5"></td>
-<td><input type="number" min="0" max="5"></td>
-<td class="total">0</td>
-<td class="percent">0%</td>
-</tr>
-<tr>
-<td>Jefferson Riguelds Pretenvil</td>
-<td><input type="number" min="0" max="5"></td>
-<td><input type="number" min="0" max="5"></td>
-<td><input type="number" min="0" max="5"></td>
-<td><input type="number" min="0" max="5"></td>
-<td class="total">0</td>
-<td class="percent">0%</td>
-</tr>
-<tr>
-<td>K. Kamaldine</td>
-<td><input type="number" min="0" max="5"></td>
-<td><input type="number" min="0" max="5"></td>
-<td><input type="number" min="0" max="5"></td>
-<td><input type="number" min="0" max="5"></td>
-<td class="total">0</td>
-<td class="percent">0%</td>
-</tr>
-<tr>
-<td>Moumouni Farhan</td>
-<td><input type="number" min="0" max="5"></td>
-<td><input type="number" min="0" max="5"></td>
-<td><input type="number" min="0" max="5"></td>
-<td><input type="number" min="0" max="5"></td>
-<td class="total">0</td>
-<td class="percent">0%</td>
-</tr>
-<tr>
-<td>Ornel Monteiro</td>
-<td><input type="number" min="0" max="5"></td>
-<td><input type="number" min="0" max="5"></td>
-<td><input type="number" min="0" max="5"></td>
-<td><input type="number" min="0" max="5"></td>
-<td class="total">0</td>
-<td class="percent">0%</td>
-</tr>
-<tr>
-<td>Zossou Mathieu</td>
-<td><input type="number" min="0" max="5"></td>
-<td><input type="number" min="0" max="5"></td>
-<td><input type="number" min="0" max="5"></td>
-<td><input type="number" min="0" max="5"></td>
-<td class="total">0</td>
-<td class="percent">0%</td>
-</tr>
-<tr><td>Participant 10</td><td><input type="number"></td><td><input type="number"></td><td><input type="number"></td><td><input type="number"></td><td class="total">0</td><td class="percent">0%</td></tr>
-<tr><td>Participant 11</td><td><input type="number"></td><td><input type="number"></td><td><input type="number"></td><td><input type="number"></td><td class="total">0</td><td class="percent">0%</td></tr>
-<tr><td>Participant 12</td><td><input type="number"></td><td><input type="number"></td><td><input type="number"></td><td><input type="number"></td><td class="total">0</td><td class="percent">0%</td></tr>
+        <h1>Odilon Laly</h1>
+        <h2>Créateur digital & Développeur web</h2>
+        <p>Je transforme vos idées en contenus créatifs et en sites web professionnels.</p>
+    </header>
 
-</tbody>
-</table>
-</div>
+    <!-- À PROPOS -->
+    <section id="apropos">
+        <h3>À propos de moi</h3>
+        <p>
+            Je suis passionné par le numérique et la création digitale.
+            Je conçois des sites web vitrines simples, modernes et efficaces.
+        </p>
+    </section>
 
-<center>
-<button onclick="calculer()">Calculer Totaux et Pourcentages</button>
-</center>
+    <!-- COMPÉTENCES -->
+    <section id="competences">
+        <h3>Mes savoir-faire</h3>
+        <ul>
+            <li>Création de sites web vitrines</li>
+            <li>Création de logos et affiches</li>
+            <li>Chansons personnalisées</li>
+            <li>Contenus IA</li>
+        </ul>
+    </section>
 
-<script>
-function calculer(){
-let rows=document.querySelectorAll("#table-horizontal tbody tr");
-rows.forEach(row=>{
-    let inputs=row.querySelectorAll("input");
-    let total=0;
-    inputs.forEach(i=>{ total+=Number(i.value); });
-    row.querySelector(".total").innerText=total;
-    row.querySelector(".percent").innerText=((total/20)*100).toFixed(1)+"%";
-});
-}
-</script>
+    <!-- SERVICES -->
+    <section id="services">
+        <h3>Mes services</h3>
+        <ul>
+            <li>🌐 Sites web professionnels</li>
+            <li>🎨 Logos & affiches</li>
+            <li>🎵 Chansons personnalisées</li>
+            <li>🤖 Contenus IA</li>
+        </ul>
+    </section>
+
+    <!-- RÉALISATIONS -->
+    <section id="realisations">
+        <h3>Mes réalisations</h3>
+        <ul>
+            <li>Site vitrine restaurant</li>
+            <li>Pages HTML/CSS</li>
+            <li>Projets IA</li>
+        </ul>
+    </section>
+
+    <!-- CONTACT + COMMANDE -->
+    <section id="contact">
+        <h3>Contact / Commande</h3>
+
+        <p>📩 E-mail : <b>odilonlaly086@gmail.com</b></p>
+        <p>📱 WhatsApp : +229 0150510966</p>
+
+        <!-- FORMULAIRE -->
+        <form id="contactForm">
+
+            <input type="text" name="name" placeholder="Nom complet" required 
+            style="width:100%; padding:10px; margin:5px 0;">
+
+            <input type="email" name="email" placeholder="Email" required 
+            style="width:100%; padding:10px; margin:5px 0;">
+
+            <input type="text" name="country" placeholder="Pays" required 
+            style="width:100%; padding:10px; margin:5px 0;">
+
+            <input type="text" name="whatsapp" placeholder="Numéro WhatsApp" required 
+            style="width:100%; padding:10px; margin:5px 0;">
+
+            <textarea name="message" placeholder="Décris ta commande (logo, site web, chanson...)" required
+            style="width:100%; padding:10px; margin:5px 0;"></textarea>
+
+            <button type="submit" style="padding:12px 20px; background:black; color:white; border:none; border-radius:5px;">
+                Envoyer la commande
+            </button>
+
+        </form>
+
+        <p id="status"></p>
+
+        <!-- BOUTON WHATSAPP -->
+        <a class="btn-commande"
+           href="https://wa.me/2290150510966?text=Bonjour%20je%20veux%20passer%20une%20commande"
+           target="_blank">
+           💬 Commander sur WhatsApp
+        </a>
+
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>© 2025 — Odilon Laly | Créateur digital</p>
+    </footer>
+
+    <!-- WHATSAPP FLOTTANT -->
+    <a class="whatsapp-float"
+       href="https://wa.me/2290150510966"
+       target="_blank">
+       WhatsApp
+    </a>
+
+    <!-- ENVOI EMAIL -->
+    <script>
+    document.getElementById("contactForm").addEventListener("submit", function(e){
+        e.preventDefault();
+
+        const form = e.target;
+        const status = document.getElementById("status");
+
+        fetch("https://formsubmit.co/ajax/odilonlaly086@gmail.com", {
+            method: "POST",
+            body: new FormData(form)
+        })
+        .then(res => res.json())
+        .then(() => {
+            status.style.color = "green";
+            status.textContent = "✅ Commande envoyée avec succès !";
+            form.reset();
+        })
+        .catch(() => {
+            status.style.color = "red";
+            status.textContent = "❌ Erreur, réessaie.";
+        });
+    });
+    </script>
 
 </body>
 </html>
