@@ -46,7 +46,6 @@ h2 { text-align:center; color:#2f80ed; }
   width:215px;
   box-shadow:0 2px 5px rgba(0,0,0,0.1);
   text-align:center;
-
 }
 
 button {
@@ -57,16 +56,24 @@ button {
   border-radius:5px;
   cursor:pointer;
 }
+
+.mute-btn {
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background:red;
+}
+
 footer {
-    background: #222;
-    color: #fff;
-    text-align: center;
-    padding: 20px;
+  background: #222;
+  color: #fff;
+  text-align: center;
+  padding: 20px;
 }
 </style>
 </head>
 
-<body>
+<body onload="demarrerGuide()">
 
 <header>
   <h1>🚀 Centre de Formation Digitale</h1>
@@ -79,9 +86,9 @@ footer {
 
     <div class="formation">
       <h3>IA</h3>
-      <p class="histoire">Création des photos pro, Affiches pub , Chanson, vidés automatisé</p>
+      <p class="histoire">Création des photos pro, Affiches pub, Chanson, vidéos automatisées</p>
       <a href="inscription.html?formation=IA">
-        <button>Choisir</button>
+        <button onclick="parler('Vous avez choisi la formation intelligence artificielle. Continuez pour vous inscrire.')">Choisir</button>
       </a>
     </div>
 
@@ -89,7 +96,7 @@ footer {
       <h3>Marketing Digital</h3>
       <p>Gagner de l’argent en ligne</p>
       <a href="inscription.html?formation=MARKETING">
-        <button>Choisir</button>
+        <button onclick="parler('Vous avez choisi la formation marketing digital. Passez à l’inscription maintenant.')">Choisir</button>
       </a>
     </div>
 
@@ -97,9 +104,43 @@ footer {
 
 </section>
 
- <footer>
-        <p>© 2026 – Formation Digital % Gaël Nobime / Odilon Laly ® </p>
-    </footer>
+<!-- Bouton couper son -->
+<button class="mute-btn" onclick="stopVoix()">🔇 Couper le son</button>
+
+<footer>
+  <p>© 2026 – Formation Digital % Gaël Nobime / Odilon Laly ® </p>
+</footer>
+
+<script>
+let voixActive = true;
+
+function parler(message) {
+  if (!voixActive) return;
+
+  const voix = new SpeechSynthesisUtterance(message);
+  voix.lang = "fr-FR";
+  voix.rate = 0.95;
+  voix.pitch = 1;
+  speechSynthesis.speak(voix);
+}
+
+function demarrerGuide() {
+  parler("Bienvenue sur notre plateforme de formation digitale.");
+
+  setTimeout(() => {
+    parler("Choisissez une formation en cliquant sur le bouton choisir.");
+  }, 4000);
+
+  setTimeout(() => {
+    parler("Attention, les places sont limitées. Cliquez maintenant pour continuer.");
+  }, 8000);
+}
+
+function stopVoix() {
+  voixActive = false;
+  speechSynthesis.cancel();
+}
+</script>
 
 </body>
-</html>>
+</html>
