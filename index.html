@@ -66,7 +66,6 @@ button {
   border:none;
   padding:10px;
   border-radius:5px;
-  cursor:pointer;
 }
 
 footer {
@@ -78,7 +77,7 @@ footer {
 </style>
 </head>
 
-<body onload="demarrerGuide()">
+<body>
 
 <header>
   <h1>🚀 Centre de Formation Digitale</h1>
@@ -93,7 +92,7 @@ footer {
       <h3>IA</h3>
       <p class="histoire">Création des photos pro, Affiches pub, Chanson, vidéos automatisées</p>
       <a href="inscription.html?formation=IA">
-        <button onclick="parler('Vous avez choisi la formation intelligence artificielle. Continuez pour vous inscrire.')">
+        <button onclick="parler('Vous avez choisi la formation intelligence artificielle.')">
           Choisir
         </button>
       </a>
@@ -103,7 +102,7 @@ footer {
       <h3>Marketing Digital</h3>
       <p>Gagner de l’argent en ligne</p>
       <a href="inscription.html?formation=MARKETING">
-        <button onclick="parler('Vous avez choisi la formation marketing digital. Continuez pour vous inscrire.')">
+        <button onclick="parler('Vous avez choisi la formation marketing digital.')">
           Choisir
         </button>
       </a>
@@ -112,7 +111,6 @@ footer {
   </div>
 </section>
 
-<!-- Bouton couper son -->
 <button class="mute-btn" onclick="stopVoix()">🔇 Couper le son</button>
 
 <footer>
@@ -121,27 +119,37 @@ footer {
 
 <script>
 let voixActive = true;
+let dejaJoue = false;
 
+// 🎤 parler
 function parler(message) {
   if (!voixActive) return;
 
   const voix = new SpeechSynthesisUtterance(message);
   voix.lang = "fr-FR";
   voix.rate = 0.95;
-  voix.pitch = 1;
+
+  speechSynthesis.cancel();
   speechSynthesis.speak(voix);
 }
 
+// 🚀 guide démarre au premier contact utilisateur
 function demarrerGuide() {
-  // 🎤 Message principal
+  if (dejaJoue) return;
+  dejaJoue = true;
+
   parler("Bienvenue dans le monde du digital.");
 
-  // 🎤 Deuxième message
   setTimeout(() => {
     parler("Veuillez choisir une formation pour continuer.");
-  }, 4000);
+  }, 3000);
 }
 
+// 👇 IMPORTANT : déclenchement réel (mobile + PC)
+document.addEventListener("click", demarrerGuide, { once: true });
+document.addEventListener("touchstart", demarrerGuide, { once: true });
+
+// 🔇 stop
 function stopVoix() {
   voixActive = false;
   speechSynthesis.cancel();
