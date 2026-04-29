@@ -31,14 +31,11 @@
       margin: 8px 0;
       border: 1px solid #cbd5e1;
       border-radius: 5px;
-      box-sizing: border-box;
       font-size: 14px;
-      color: #0f172a;
       background: #f8fafc;
     }
 
     input:focus, textarea:focus {
-      outline: none;
       border-color: #2f80ed;
       background: white;
     }
@@ -57,16 +54,15 @@
       border-radius: 5px;
       font-size: 16px;
       cursor: pointer;
-      transition: 0.3s;
-    }
-
-    button:hover {
-      background: #1c5fc4;
     }
 
     button:disabled {
       background: grey;
-      cursor: not-allowed;
+    }
+
+    .start-btn {
+      background: green;
+      margin-bottom: 15px;
     }
 
     .mute-btn {
@@ -74,6 +70,10 @@
       bottom: 20px;
       right: 20px;
       background: red;
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 5px;
     }
 
     #status {
@@ -92,11 +92,14 @@
   </style>
 </head>
 
-<body onload="demarrerGuide()">
+<body>
 
 <section>
 
   <h3>Inscription à la formation</h3>
+
+  <!-- Bouton démarrer (important pour activer la voix) -->
+  <button class="start-btn" onclick="demarrerGuide()">▶️ Démarrer le guide</button>
 
   <form id="contactForm">
 
@@ -106,16 +109,16 @@
 
     <input type="text" name="country" placeholder="Pays" required onfocus="parler('Entrez votre pays de résidence')">
 
-    <input type="text" name="whatsapp" placeholder="Numéro WhatsApp" required onfocus="parler('Entrez votre numéro WhatsApp pour être contacté')">
+    <input type="text" name="whatsapp" placeholder="Numéro WhatsApp" required onfocus="parler('Entrez votre numéro WhatsApp')">
 
     <input type="text" id="formation" name="formation" readonly>
 
-    <textarea name="message" placeholder="Message (optionnel)" onfocus="parler('Vous pouvez laisser un message si vous voulez')"></textarea>
+    <textarea name="message" placeholder="Message (optionnel)" onfocus="parler('Vous pouvez laisser un message')"></textarea>
 
     <input type="hidden" name="_captcha" value="false">
     <input type="hidden" name="_subject" value="Nouvelle inscription formation">
 
-    <button type="submit" id="submitBtn" onclick="parler('Cliquez pour finaliser votre inscription')">
+    <button type="submit" id="submitBtn">
       S'inscrire
     </button>
 
@@ -125,27 +128,32 @@
 
 </section>
 
-<!-- Bouton couper le son -->
 <button class="mute-btn" onclick="stopVoix()">🔇</button>
 
 <script>
 let voixActive = true;
+let guideLance = false;
 
+// 🎤 parler
 function parler(message) {
   if (!voixActive) return;
 
   const voix = new SpeechSynthesisUtterance(message);
   voix.lang = "fr-FR";
   voix.rate = 0.95;
-  voix.pitch = 1;
+  speechSynthesis.cancel(); // évite superposition
   speechSynthesis.speak(voix);
 }
 
+// 🚀 guide
 function demarrerGuide() {
-  parler("Bienvenue sur la page d'inscription.");
+  if (guideLance) return;
+  guideLance = true;
+
+  parler("Bienvenue dans le monde du digital.");
 
   setTimeout(() => {
-    parler("Remplissez le formulaire pour continuer.");
+    parler("Veuillez remplir le formulaire pour continuer.");
   }, 3000);
 
   setTimeout(() => {
@@ -153,32 +161,29 @@ function demarrerGuide() {
   }, 6000);
 }
 
+// 🔇 stop
 function stopVoix() {
   voixActive = false;
   speechSynthesis.cancel();
 }
 
+// 📌 récupérer formation
 const params = new URLSearchParams(window.location.search);
-const formationValue = params.get("formation") || "Non précisée";
-document.getElementById("formation").value = formationValue;
+document.getElementById("formation").value =
+  params.get("formation") || "Non précisée";
 
-
+// 📤 envoi formulaire
 document.getElementById("contactForm").addEventListener("submit", function(e) {
   e.preventDefault();
 
   parler("Inscription en cours. Veuillez patienter.");
 
   const form = e.target;
-  const submitBtn = document.getElementById("submitBtn");
+  const btn = document.getElementById("submitBtn");
   const status = document.getElementById("status");
 
-  const name = form.name.value;
-  const email = form.email.value;
-  const formation = form.formation.value;
-
-  submitBtn.disabled = true;
-  status.style.color = "#0f172a";
-  status.textContent = "⏳ Envoi en cours...";
+  btn.disabled = true;
+  status.textContent = "⏳ Envoi...";
 
   fetch("https://formsubmit.co/ajax/gaelnobime5@gmail.com", {
     method: "POST",
@@ -187,14 +192,14 @@ document.getElementById("contactForm").addEventListener("submit", function(e) {
   .then(res => res.json())
   .then(() => {
 
-    localStorage.setItem('inscritName', name);
-    localStorage.setItem('inscritEmail', email);
-    localStorage.setItem('inscritFormation', formation);
+    localStorage.setItem('inscritName', form.name.value);
+    localStorage.setItem('inscritEmail', form.email.value);
+    localStorage.setItem('inscritFormation', form.formation.value);
 
     status.style.color = "green";
     status.textContent = "✅ Inscription réussie !";
 
-    parler("Inscription réussie. Vous allez être redirigé.");
+    parler("Inscription réussie. Redirection en cours.");
 
     setTimeout(() => {
       window.location.href = "merci.html";
@@ -203,11 +208,9 @@ document.getElementById("contactForm").addEventListener("submit", function(e) {
   })
   .catch(() => {
     status.style.color = "red";
-    status.textContent = "❌ Erreur, réessaie.";
-    parler("Une erreur est survenue. Veuillez réessayer.");
-    submitBtn.disabled = false;
+    status.textContent = "❌ Erreur";
+    btn.disabled = false;
   });
-
 });
 </script>
 
