@@ -1,288 +1,105 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portfolio Digital - Création Pro</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Formations Digitales</title>
 
-  <style>
-    body{
-      margin:0;
-      font-family:Arial, sans-serif;
-      background:#0f172a;
-      color:white;
-    }
+<style>
+body { font-family: Arial; margin:0; background:#f5f6fa; }
 
-    header{
-      text-align:center;
-      padding:60px 20px;
-      background:#111827;
-    }
-    
-    .logo{
-  position: absolute;
-  top: 15px;
-  left: 15px;
+header {
+  background:#2f80ed;
+  color:white;
+  padding:15px;
+  text-align:center;
 }
 
-.logo img{
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid #facc15;
-  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+section {
+  padding:40px 20px;
+  max-width:1000px;
+  margin:auto;
 }
 
-    header h1{
-      font-size:40px;
-      margin-bottom:10px;
-    }
+h2 { text-align:center; color:#2f80ed; }
 
-    header p{
-      color:#cbd5e1;
-    }
+.formations {
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:20px;
+}
 
-    nav{
-      text-align:center;
-      background:#1f2937;
-      padding:10px;
-      position:sticky;
-      top:0;
-    }
+.formation {
+  background:white;
+  padding:20px;
+  border-radius:8px;
+  width:250px;
+  box-shadow:0 2px 5px rgba(0,0,0,0.1);
+  text-align:center;
+}
 
-    nav a{
-      color:white;
-      margin:10px;
-      text-decoration:none;
-      font-weight:bold;
-    }
+.histoire { 
+  background: gainsboro;
+  padding:20px;
+  border-radius:8px;
+  width:215px;
+  box-shadow:0 2px 5px rgba(0,0,0,0.1);
+  text-align:center;
 
-    section{
-      padding:50px 20px;
-      max-width:1000px;
-      margin:auto;
-    }
+}
 
-    h2{
-      text-align:center;
-      margin-bottom:20px;
-    }
-
-    .grid{
-      display:grid;
-      grid-template-columns:repeat(auto-fit, minmax(200px,1fr));
-      gap:20px;
-    }
-
-    .card{
-      background:#1e293b;
-      padding:15px;
-      border-radius:10px;
-      text-align:center;
-    }
-
-    .card img{
-      width:100%;
-      border-radius:10px;
-    }
-
-    /* CONTACT */
-    input, textarea{
-      width:100%;
-      padding:10px;
-      margin:10px 0;
-      border-radius:5px;
-      border:none;
-    }
-
-    button{
-      padding:12px;
-      background:#facc15;
-      border:none;
-      border-radius:5px;
-      font-weight:bold;
-      cursor:pointer;
-      width:100%;
-    }
-
-    button:hover{
-      background:#eab308;
-    }
-
-    .whatsapp{
-      display:inline-block;
-      margin-top:15px;
-      background:#25D366;
-      padding:12px 20px;
-      border-radius:5px;
-      text-decoration:none;
-      color:white;
-      font-weight:bold;
-    }
-
-    footer{
-      text-align:center;
-      padding:20px;
-      background:#111827;
-      margin-top:30px;
-    }
-  </style>
+button {
+  padding:10px;
+  background:#27ae60;
+  color:white;
+  border:none;
+  border-radius:5px;
+  cursor:pointer;
+}
+footer {
+    background: #222;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+}
+</style>
 </head>
 
 <body>
 
-<!-- HEADER -->
 <header>
-  <h1>Création Digitale Pro</h1>
-  <p>Images • Logos • Affiches • Sites Web • Chansons personnalisées</p>
+  <h1>🚀 Centre de Formation Digitale</h1>
 </header>
 
-<div class="logo">
-  <img src="lalylaodilon.png" alt="Logo">
-</div>
+<section>
+  <h2>Choisissez votre formation</h2>
 
-<!-- NAV -->
-<nav>
-  <a href="#about">À propos</a>
-  <a href="#services">Services</a>
-  <a href="#portfolio">Portfolio</a>
-  <a href="#contact">Contact</a>
-</nav>
+  <div class="formations">
 
-<!-- ABOUT -->
-<section id="about">
-  <h2>À propos</h2>
-  <p style="text-align:center;">
-    Je suis un créateur digital spécialisé dans la conception d’images professionnelles,
-    logos, affiches publicitaires, sites web et chansons personnalisées.
-  </p>
-</section>
-
-<!-- SERVICES -->
-<section id="services">
-  <h2>Services</h2>
-
-  <div class="grid">
-
-    <div class="card">
-      <h3>🎨 Images Pro</h3>
-      <p>Création d’images modernes et professionnelles</p>
+    <div class="formation">
+      <h3>IA</h3>
+      <p class="histoire">Création des photos pro, Affiches pub , Chanson, vidés automatisé</p>
+      <a href="inscription.html?formation=IA">
+        <button>Choisir</button>
+      </a>
     </div>
 
-    <div class="card">
-      <h3>🖼️ Affiches</h3>
-      <p>Publicité pour entreprises et événements</p>
-    </div>
-
-    <div class="card">
-      <h3>🧩 Logos</h3>
-      <p>Logos uniques et modernes</p>
-    </div>
-
-    <div class="card">
-      <h3>🌐 Sites Web</h3>
-      <p>Sites vitrines professionnels et rapides</p>
-    </div>
-
-    <div class="card">
-      <h3>🎵 Chansons</h3>
-      <p>Chansons personnalisées (amour, anniversaire...)</p>
+    <div class="formation">
+      <h3>Marketing Digital</h3>
+      <p>Gagner de l’argent en ligne</p>
+      <a href="inscription.html?formation=MARKETING">
+        <button>Choisir</button>
+      </a>
     </div>
 
   </div>
+
 </section>
 
-<!-- PORTFOLIO -->
-<section id="portfolio">
-  <h2>Portfolio</h2>
-
-  <div class="grid">
-
-    <div class="card">
-      <p>Image Pro 1</p>
-    </div>
-
-    <div class="card">
-      <p>Logo Design</p>
-    </div>
-
-    <div class="card">
-      <p>Affiche Pub</p>
-    </div>
-
-    <div class="card">
-      <p>Site Web</p>
-    </div>
-
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section id="contact">
-  <h2>Contact / Commande</h2>
-
-  <form id="contactForm">
-
-    <input type="text" name="name" placeholder="Nom complet" required>
-
-    <input type="email" name="email" placeholder="Email" required>
-
-    <input type="text" name="country" placeholder="Pays" required>
-
-    <input type="text" name="whatsapp" placeholder="Numéro WhatsApp" required>
-
-    <textarea name="message" placeholder="Décris ta commande (logo, site web, chanson...)" rows="5" required></textarea>
-
-    <button type="submit" id="submitBtn">Envoyer la commande</button>
-  </form>
-
-  <p id="status"></p>
-
-  <a class="whatsapp"
-     href="https://wa.me/2290150510966?text=Bonjour%20je%20veux%20passer%20une%20commande"
-     target="_blank">
-     💬 Commander sur WhatsApp
-  </a>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  © 2026 - Portfolio Création Digitale | Tous droits réservés
-</footer>
-
-<!-- SCRIPT FORMULAIRE -->
-<script>
-document.getElementById("contactForm").addEventListener("submit", function(e){
-  e.preventDefault();
-
-  const form = e.target;
-  const btn = document.getElementById("submitBtn");
-  const status = document.getElementById("status");
-
-  btn.disabled = true;
-  btn.textContent = "Envoi...";
-
-  fetch("https://formsubmit.co/ajax/odilonlaly086@gmail.com", {
-    method: "POST",
-    body: new FormData(form)
-  })
-  .then(res => res.json())
-  .then(() => {
-    status.style.color = "lightgreen";
-    status.textContent = "✅ Commande envoyée avec succès !";
-    form.reset();
-  })
-  .catch(() => {
-    status.style.color = "red";
-    status.textContent = "❌ Erreur, réessaie.";
-  })
-  .finally(() => {
-    btn.disabled = false;
-    btn.textContent = "Envoyer la commande";
-  });
-});
-</script>
+ <footer>
+        <p>© 2026 – Formation Digital % Gaël Nobime / Odilon Laly ® </p>
+    </footer>
 
 </body>
-</html>
+</html>>
