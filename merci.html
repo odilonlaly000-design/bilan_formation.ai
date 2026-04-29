@@ -24,9 +24,50 @@ body {
   text-align:center;
   width:90%;
   max-width:500px;
+  box-shadow:0 5px 25px rgba(0,0,0,0.3);
 }
 
-h1 { color:#4ade80; }
+h1 {
+  color:#4ade80;
+  font-size:24px;
+}
+
+p {
+  font-size:15px;
+  line-height:1.6;
+}
+
+.info {
+  background: #4D55B0;
+  padding:15px;
+  border-radius:6px;
+  margin:20px 0;
+  text-align:left;
+}
+
+.info p {
+  margin:6px 0;
+}
+
+.highlight {
+  font-weight:bold;
+  color:#4ade80;
+}
+
+.urgent {
+  color:#ff4d4d;
+  font-weight:bold;
+  font-size:16px;
+}
+
+ul {
+  text-align:left;
+  padding-left:20px;
+}
+
+li {
+  margin:6px 0;
+}
 
 button {
   margin-top:20px;
@@ -44,15 +85,10 @@ button:hover {
   background:darkred;
 }
 
-.mute-btn {
-  position:fixed;
-  bottom:20px;
-  right:20px;
-  background:red;
-  color:white;
-  border:none;
-  padding:10px;
-  border-radius:5px;
+.small {
+  font-size:13px;
+  margin-top:10px;
+  color:#ccc;
 }
 </style>
 </head>
@@ -65,21 +101,51 @@ button:hover {
 
 <p id="messagePerso">Chargement...</p>
 
-<div id="detailsInscription"></div>
+<div class="info" id="detailsInscription"></div>
 
-<h3>👉 Cliquez sur payer maintenant pour confirmer</h3>
+<p><strong>🚀 Votre place est pré-réservée.</strong></p>
 
-<a href="https://nyrrnajz.mychariow.shop/prd_4j6na2">
-  <button onclick="parler('Vous allez maintenant confirmer votre accès')">
-    💳 Payer maintenant
-  </button>
+<p class="urgent">⏳ Attention : votre réservation expire bientôt !</p>
+
+<p>👉 Sans validation immédiate, votre accès peut être attribué à une autre personne.</p>
+
+<hr>
+
+<p class="highlight">💡 Dès votre paiement, vous débloquez immédiatement :</p>
+
+<ul>
+<li>✔️ Création avec l’IA (histoires, chansons, vidéos)</li>
+<li>✔️ Stratégies concrètes pour gagner de l’argent</li>
+<li>✔️ Méthodes utilisées par les experts</li>
+<li>✔️ Accompagnement rapide et efficace</li>
+</ul>
+
+<hr>
+
+<p><strong>🔥 Ce que vous risquez en attendant :</strong></p>
+
+<p>❌ Perdre votre place<br>
+❌ Rater une opportunité importante<br>
+❌ Continuer sans évolution</p>
+
+<p class="highlight">
+👉 Ceux qui réussissent passent à l’action immédiatement.
+</p>
+<h3 class="urgent">Cliquez sur `Payer maintenant` pour valider votre l'inscription</h3>
+<a href="https://ton-lien-paiement.com">
+  <button>💳 Payer maintenant</button>
 </a>
+
+<p class="small">🔥 Plus de 120 personnes ont déjà validé leur inscription</p>
+
+<p class="small">💬 Nous sommes prêts à vous accompagner dès aujourd’hui</p>
+
+<p class="small"><strong>À tout de suite dans la formation 🙌</strong></p>
 
 </div>
 
-<button class="mute-btn" onclick="stopVoix()">🔇</button>
-
 <script>
+
 let voixActive = true;
 let dejaJoue = false;
 
@@ -103,11 +169,11 @@ function lancerVoix() {
   parler("Félicitations, votre inscription est bien reçue.");
 
   setTimeout(() => {
-    parler("Pour confirmer votre accès à la formation, cliquez maintenant sur payer.");
+    parler(" cliquez sur payer maintenant pour valider.");
   }, 3000);
 
   setTimeout(() => {
-    parler("Attention, votre place est limitée. Merci.");
+    parler("la place est limitée. Merci.");
   }, 7000);
 }
 
@@ -115,26 +181,36 @@ function lancerVoix() {
 document.addEventListener("click", lancerVoix, { once: true });
 document.addEventListener("touchstart", lancerVoix, { once: true });
 
-// 🔇 couper
-function stopVoix() {
-  voixActive = false;
-  speechSynthesis.cancel();
-}
-
-// 📌 récupérer données
+// 👉 Récupération des données
 const name = localStorage.getItem('inscritName');
 const email = localStorage.getItem('inscritEmail');
 const formation = localStorage.getItem('inscritFormation');
 
-if(name){
-  document.getElementById("messagePerso").innerHTML =
-    "Merci <strong>" + name + "</strong>, votre inscription est confirmée !";
+const message = document.getElementById('messagePerso');
+const details = document.getElementById('detailsInscription');
 
-  document.getElementById("detailsInscription").innerHTML =
-    "<p>Email: " + email + "</p><p>Formation: " + formation + "</p>";
+// 👉 Affichage personnalisé
+if(name && email && formation){
 
-  localStorage.clear();
+  message.innerHTML = `Merci <strong>${name}</strong>, votre inscription est confirmée !`;
+
+  details.innerHTML = `
+    <p><strong>Nom :</strong> ${name}</p>
+    <p><strong>Email :</strong> ${email}</p>
+    <p><strong>Formation :</strong> ${formation}</p>
+  `;
+
+  // Nettoyage
+  localStorage.removeItem('inscritName');
+  localStorage.removeItem('inscritEmail');
+  localStorage.removeItem('inscritFormation');
+
+} else {
+
+  message.textContent = "Votre inscription a bien été prise en compte.";
+
 }
+
 </script>
 
 </body>
