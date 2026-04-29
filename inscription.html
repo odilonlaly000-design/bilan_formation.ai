@@ -1,87 +1,111 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Inscription Formation</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Formations Digitales</title>
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #0f172a;
-      color: white;
-    }
+<style>
+body { font-family: Arial; margin:0; background:#f5f6fa; }
 
-    section {
-      max-width: 500px;
-      margin: auto;
-      padding: 30px;
-    }
+header {
+  background:#2f80ed;
+  color:white;
+  padding:15px;
+  text-align:center;
+}
 
-    h3 {
-      text-align: center;
-      font-size: 22px;
-    }
+section {
+  padding:40px 20px;
+  max-width:1000px;
+  margin:auto;
+}
 
-    input, textarea {
-      width: 100%;
-      padding: 12px;
-      margin: 8px 0;
-      border: none;
-      border-radius: 5px;
-      box-sizing: border-box;
-      font-size: 14px;
-    }
+h2 { text-align:center; color:#2f80ed; }
 
-    input[readonly] {
-      background: #1e293b;
-      color: #94a3b8;
-    }
+.formations {
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:20px;
+}
 
-    button {
-      width: 100%;
-      padding: 14px;
-      background: red;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      font-size: 16px;
-      cursor: pointer;
-    }
+.formation {
+  background:white;
+  padding:20px;
+  border-radius:8px;
+  width:250px;
+  box-shadow:0 2px 5px rgba(0,0,0,0.1);
+  text-align:center;
+}
 
-    button:hover {
-      background: darkred;
-    }
+button {
+  padding:10px;
+  background:#27ae60;
+  color:white;
+  border:none;
+  border-radius:5px;
+  cursor:pointer;
+}
 
-    button:disabled {
-      background: grey;
-      cursor: not-allowed;
-    }
+form {
+  max-width:400px;
+  margin:auto;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
 
-    #status {
-      text-align: center;
-      margin-top: 15px;
-      font-weight: bold;
-    }
+input, textarea {
+  padding:10px;
+  border-radius:5px;
+  border:1px solid #ccc;
+}
 
-    footer {
-      background: #222;
-      color: #fff;
-      text-align: center;
-      padding: 25px;
-      margin-top: 30px;
-    }
-  </style>
+#status {
+  text-align:center;
+  margin-top:10px;
+}
+</style>
 </head>
 
 <body>
 
-<section>
+<header>
+  <h1>🚀 Centre de Formation Digitale</h1>
+</header>
 
-  <h3>🚀 Inscription à la formation</h3>
+<!-- FORMATIONS -->
+<section id="formations">
+  <h2>Choisissez votre formation</h2>
+  <div class="formations">
 
-  <form id="contactForm">
+    <div class="formation">
+      <h3>IA</h3>
+      <p>Créer histoires, chansons et vidéos automatiques</p>
+      <button onclick="choisirFormation('IA')">Choisir</button>
+    </div>
+
+    <div class="formation">
+      <h3>Développement Web</h3>
+      <p>Apprendre HTML & CSS facilement</p>
+      <button onclick="choisirFormation('WEB')">Choisir</button>
+    </div>
+
+    <div class="formation">
+      <h3>Marketing Digital</h3>
+      <p>Gagner de l’argent en ligne</p>
+      <button onclick="choisirFormation('MARKETING')">Choisir</button>
+    </div>
+
+  </div>
+</section>
+
+<!-- INSCRIPTION -->
+<section id="inscription">
+  <h2>Inscription</h2>
+
+  <form id="form">
 
     <input type="text" name="name" placeholder="Nom complet" required>
 
@@ -89,17 +113,13 @@
 
     <input type="text" name="country" placeholder="Pays" required>
 
-    <input type="text" name="whatsapp" placeholder="Numéro WhatsApp" required>
+    <input type="text" name="whatsapp" placeholder="WhatsApp" required>
 
-    <!-- Formation auto -->
     <input type="text" id="formation" name="formation" readonly>
 
-    <textarea name="message" placeholder="Message (optionnel)"></textarea>
+    <textarea name="message" placeholder="Message"></textarea>
 
-    <input type="hidden" name="_captcha" value="false">
-    <input type="hidden" name="_subject" value="Nouvelle inscription formation">
-
-    <button type="submit" id="submitBtn">S'inscrire</button>
+    <button type="submit">S'inscrire</button>
 
   </form>
 
@@ -109,62 +129,45 @@
 
 <script>
 
-// 👉 Récupérer la formation depuis l'URL
-const params = new URLSearchParams(window.location.search);
-const formationValue = params.get("formation") || "Non précisée";
-document.getElementById("formation").value = formationValue;
+// choisir formation
+function choisirFormation(f){
+  document.getElementById("formation").value = f;
+  window.scrollTo({
+    top: document.getElementById("inscription").offsetTop,
+    behavior: "smooth"
+  });
+}
 
-
-// 👉 Envoi du formulaire
-document.getElementById("contactForm").addEventListener("submit", function(e) {
+// envoi formulaire
+document.getElementById("form").addEventListener("submit", function(e){
   e.preventDefault();
 
-  const form = e.target;
-  const submitBtn = document.getElementById("submitBtn");
   const status = document.getElementById("status");
+  status.innerHTML = "⏳ Envoi en cours...";
 
-  const name = form.name.value;
-  const email = form.email.value;
-  const formation = form.formation.value;
-
-  submitBtn.disabled = true;
-  status.style.color = "white";
-  status.textContent = "⏳ Envoi en cours...";
-
-  fetch("https://formsubmit.co/ajax/odilonlaly086@gmail.com", {
+  fetch("https://formsubmit.co/ajax/gaelnobime5@gmail.com", {
     method: "POST",
-    body: new FormData(form)
+    body: new FormData(this)
   })
   .then(res => res.json())
   .then(() => {
+    status.style.color = "green";
+    status.innerHTML = "✅ Inscription réussie !";
 
-    // ✅ Stockage pour la page merci
-    localStorage.setItem('inscritName', name);
-    localStorage.setItem('inscritEmail', email);
-    localStorage.setItem('inscritFormation', formation);
-
-    status.style.color = "lightgreen";
-    status.textContent = "✅ Inscription réussie ! Redirection...";
-
-    // 👉 Redirection vers page merci
-    setTimeout(() => {
+    setTimeout(()=>{
       window.location.href = "merci.html";
-    }, 1200);
+    },1500);
 
+    this.reset();
   })
-  .catch(() => {
+  .catch(()=>{
     status.style.color = "red";
-    status.textContent = "❌ Erreur, réessaie.";
-    submitBtn.disabled = false;
+    status.innerHTML = "❌ Erreur, réessaie.";
   });
 
 });
 
 </script>
-
-<footer>
-  <p>© 2026 – Formation Digital % Gaël Nobime / Odilon Laly ®</p>
-</footer>
 
 </body>
 </html>
