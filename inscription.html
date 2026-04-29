@@ -69,6 +69,13 @@
       cursor: not-allowed;
     }
 
+    .mute-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: red;
+    }
+
     #status {
       text-align: center;
       margin-top: 15px;
@@ -85,7 +92,7 @@
   </style>
 </head>
 
-<body>
+<body onload="demarrerGuide()">
 
 <section>
 
@@ -93,22 +100,24 @@
 
   <form id="contactForm">
 
-    <input type="text" name="name" placeholder="Nom complet" required>
+    <input type="text" name="name" placeholder="Nom complet" required onfocus="parler('Entrez votre nom complet ici')">
 
-    <input type="email" name="email" placeholder="Email" required>
+    <input type="email" name="email" placeholder="Email" required onfocus="parler('Entrez votre adresse email valide')">
 
-    <input type="text" name="country" placeholder="Pays" required>
+    <input type="text" name="country" placeholder="Pays" required onfocus="parler('Entrez votre pays de résidence')">
 
-    <input type="text" name="whatsapp" placeholder="Numéro WhatsApp" required>
+    <input type="text" name="whatsapp" placeholder="Numéro WhatsApp" required onfocus="parler('Entrez votre numéro WhatsApp pour être contacté')">
 
     <input type="text" id="formation" name="formation" readonly>
 
-    <textarea name="message" placeholder="Message (optionnel)"></textarea>
+    <textarea name="message" placeholder="Message (optionnel)" onfocus="parler('Vous pouvez laisser un message si vous voulez')"></textarea>
 
     <input type="hidden" name="_captcha" value="false">
     <input type="hidden" name="_subject" value="Nouvelle inscription formation">
 
-   <a href="https://nyrrnajz.mychariow.shop/prd_4j6na2"> <button type="submit" id="submitBtn">S'inscrire</button></a>
+    <button type="submit" id="submitBtn" onclick="parler('Cliquez pour finaliser votre inscription')">
+      S'inscrire
+    </button>
 
   </form>
 
@@ -116,7 +125,38 @@
 
 </section>
 
+<!-- Bouton couper le son -->
+<button class="mute-btn" onclick="stopVoix()">🔇</button>
+
 <script>
+let voixActive = true;
+
+function parler(message) {
+  if (!voixActive) return;
+
+  const voix = new SpeechSynthesisUtterance(message);
+  voix.lang = "fr-FR";
+  voix.rate = 0.95;
+  voix.pitch = 1;
+  speechSynthesis.speak(voix);
+}
+
+function demarrerGuide() {
+  parler("Bienvenue sur la page d'inscription.");
+
+  setTimeout(() => {
+    parler("Remplissez le formulaire pour continuer.");
+  }, 3000);
+
+  setTimeout(() => {
+    parler("Commencez par entrer votre nom complet.");
+  }, 6000);
+}
+
+function stopVoix() {
+  voixActive = false;
+  speechSynthesis.cancel();
+}
 
 const params = new URLSearchParams(window.location.search);
 const formationValue = params.get("formation") || "Non précisée";
@@ -125,6 +165,8 @@ document.getElementById("formation").value = formationValue;
 
 document.getElementById("contactForm").addEventListener("submit", function(e) {
   e.preventDefault();
+
+  parler("Inscription en cours. Veuillez patienter.");
 
   const form = e.target;
   const submitBtn = document.getElementById("submitBtn");
@@ -150,21 +192,23 @@ document.getElementById("contactForm").addEventListener("submit", function(e) {
     localStorage.setItem('inscritFormation', formation);
 
     status.style.color = "green";
-    status.textContent = "✅ Inscription réussie ! Redirection...";
+    status.textContent = "✅ Inscription réussie !";
+
+    parler("Inscription réussie. Vous allez être redirigé.");
 
     setTimeout(() => {
       window.location.href = "merci.html";
-    }, 1200);
+    }, 1500);
 
   })
   .catch(() => {
     status.style.color = "red";
     status.textContent = "❌ Erreur, réessaie.";
+    parler("Une erreur est survenue. Veuillez réessayer.");
     submitBtn.disabled = false;
   });
 
 });
-
 </script>
 
 <footer>
@@ -173,3 +217,4 @@ document.getElementById("contactForm").addEventListener("submit", function(e) {
 
 </body>
 </html>
+    
