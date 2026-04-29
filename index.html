@@ -62,6 +62,11 @@ button {
   bottom:20px;
   right:20px;
   background:red;
+  color:white;
+  border:none;
+  padding:10px;
+  border-radius:5px;
+  cursor:pointer;
 }
 
 footer {
@@ -88,7 +93,9 @@ footer {
       <h3>IA</h3>
       <p class="histoire">Création des photos pro, Affiches pub, Chanson, vidéos automatisées</p>
       <a href="inscription.html?formation=IA">
-        <button onclick="parler('Vous avez choisi la formation intelligence artificielle. Continuez pour vous inscrire.')">Choisir</button>
+        <button onclick="parler('Vous avez choisi la formation intelligence artificielle. Continuez pour vous inscrire.')">
+          Choisir
+        </button>
       </a>
     </div>
 
@@ -96,12 +103,13 @@ footer {
       <h3>Marketing Digital</h3>
       <p>Gagner de l’argent en ligne</p>
       <a href="inscription.html?formation=MARKETING">
-        <button onclick="parler('Vous avez choisi la formation marketing digital. Passez à l’inscription maintenant.')">Choisir</button>
+        <button onclick="parler('Vous avez choisi la formation marketing digital. Continuez pour vous inscrire.')">
+          Choisir
+        </button>
       </a>
     </div>
 
   </div>
-
 </section>
 
 <!-- Bouton couper son -->
@@ -125,15 +133,13 @@ function parler(message) {
 }
 
 function demarrerGuide() {
-  parler("Bienvenue sur notre plateforme de formation digitale.");
+  // 🎤 Message principal
+  parler("Bienvenue dans le monde du digital.");
 
+  // 🎤 Deuxième message
   setTimeout(() => {
-    parler("Choisissez une formation en cliquant sur le bouton choisir.");
+    parler("Veuillez choisir une formation pour continuer.");
   }, 4000);
-
-  setTimeout(() => {
-    parler("Attention, les places sont limitées. Cliquez maintenant pour continuer.");
-  }, 8000);
 }
 
 function stopVoix() {
