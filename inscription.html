@@ -10,7 +10,7 @@
       margin: 0;
       font-family: Arial, sans-serif;
       background: white;
-      color: white;
+      color: #0f172a;
     }
 
     section {
@@ -22,36 +22,46 @@
     h3 {
       text-align: center;
       font-size: 22px;
+      color: #2f80ed;
     }
 
     input, textarea {
       width: 100%;
       padding: 12px;
       margin: 8px 0;
-      border: none;
+      border: 1px solid #cbd5e1;
       border-radius: 5px;
       box-sizing: border-box;
       font-size: 14px;
+      color: #0f172a;
+      background: #f8fafc;
+    }
+
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: #2f80ed;
+      background: white;
     }
 
     input[readonly] {
-      background: #1e293b;
-      color: #94a3b8;
+      background: #e2e8f0;
+      color: #64748b;
     }
 
     button {
       width: 100%;
       padding: 14px;
-      background: red;
+      background: #2f80ed;
       color: white;
       border: none;
       border-radius: 5px;
       font-size: 16px;
       cursor: pointer;
+      transition: 0.3s;
     }
 
     button:hover {
-      background: darkred;
+      background: #1c5fc4;
     }
 
     button:disabled {
@@ -66,8 +76,8 @@
     }
 
     footer {
-      background: #222;
-      color: #fff;
+      background: #0f172a;
+      color: white;
       text-align: center;
       padding: 25px;
       margin-top: 30px;
@@ -79,7 +89,7 @@
 
 <section>
 
-  <h3>🚀 Inscription à la formation</h3>
+  <h3>Inscription à la formation</h3>
 
   <form id="contactForm">
 
@@ -91,7 +101,6 @@
 
     <input type="text" name="whatsapp" placeholder="Numéro WhatsApp" required>
 
-    <!-- Formation auto -->
     <input type="text" id="formation" name="formation" readonly>
 
     <textarea name="message" placeholder="Message (optionnel)"></textarea>
@@ -109,13 +118,11 @@
 
 <script>
 
-// 👉 Récupérer la formation depuis l'URL
 const params = new URLSearchParams(window.location.search);
 const formationValue = params.get("formation") || "Non précisée";
 document.getElementById("formation").value = formationValue;
 
 
-// 👉 Envoi du formulaire
 document.getElementById("contactForm").addEventListener("submit", function(e) {
   e.preventDefault();
 
@@ -128,7 +135,7 @@ document.getElementById("contactForm").addEventListener("submit", function(e) {
   const formation = form.formation.value;
 
   submitBtn.disabled = true;
-  status.style.color = "white";
+  status.style.color = "#0f172a";
   status.textContent = "⏳ Envoi en cours...";
 
   fetch("https://formsubmit.co/ajax/gaelnobime5@gmail.com", {
@@ -138,15 +145,13 @@ document.getElementById("contactForm").addEventListener("submit", function(e) {
   .then(res => res.json())
   .then(() => {
 
-    // ✅ Stockage pour la page merci
     localStorage.setItem('inscritName', name);
     localStorage.setItem('inscritEmail', email);
     localStorage.setItem('inscritFormation', formation);
 
-    status.style.color = "lightgreen";
+    status.style.color = "green";
     status.textContent = "✅ Inscription réussie ! Redirection...";
 
-    // 👉 Redirection vers page merci
     setTimeout(() => {
       window.location.href = "merci.html";
     }, 1200);
@@ -163,7 +168,7 @@ document.getElementById("contactForm").addEventListener("submit", function(e) {
 </script>
 
 <footer>
-  <p>© 2026 – Formation Digital % Gaël Nobime / Odilon Laly ®</p>
+  <p>© 2026 – Formation Digital % Gael Nobime & Odilon Laly ®</p>
 </footer>
 
 </body>
